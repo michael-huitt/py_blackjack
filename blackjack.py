@@ -3,10 +3,10 @@ import os
 
 term_size = os.get_terminal_size()
 
-SEPERATOR_LEN = term_size.columns  #length of the seperators that appear on screen
+SEPERATOR_LEN = term_size.columns   #length of the seperators that appear on screen
 
 balance = 1000
-wager = 15          #default, can be changed in main game loop
+wager = 15                          #default, can be changed in main game loop
 winnings = 0
 
 def calculate_score(hand):
@@ -35,10 +35,21 @@ def calculate_score(hand):
 def compare_scores(p1_score, p2_score):
         scores = [p1_score, p2_score]
         scores.sort(reverse = True)
+        
         for score in scores:
-            if score < 21 and (scores[score - 1] < score):
-                   pass 
-                    
+            if int(score) > 21:
+                scores.remove(score)
+        
+        if len(scores) == 1:
+            return scores[0]
+
+        elif len(scores) == 2:
+            if scores[0] != scores[1]:
+                return scores[0]
+            
+            else:
+                return 0
+
 ##functions with the prefix 'display' handles
 ##the display of global variables such as winnings
 
@@ -119,6 +130,17 @@ def main():
             print(f"SCORE: {player_score}")
             dealer_hand.append(deck.pop())
             display_footer()
+
+        winning_score = compare_scores(player_score, dealer_score) 
+        
+        if player_score == winning_score:
+            print("!!! YOU WIN !!!")
+        
+        elif dealer_score == winning_score:
+            print("DEALER WINS")
+        
+        elif winning_score == 0:
+            print("TIE")
 
     elif yn_prompt.lower() == "n":
         return
