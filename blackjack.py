@@ -51,6 +51,9 @@ def compare_scores(p1_score, p2_score):
         if len(scores) == 1:
             return scores[0]
 
+        elif len(scores) == 0:
+            return 1
+
         elif len(scores) == 2:
             if scores[0] != scores[1]:
                 return scores[0]
@@ -149,7 +152,7 @@ def main():
             print("-= DEALER WINS =-")
             subtract_balance()
 
-        elif winning_score == 0:
+        elif winning_score == 0 or winning_score == 1:
             print("-= TIE =-")
 
     elif yn_prompt.lower() == "n":
