@@ -120,7 +120,7 @@ def main():
                 break
 
             display_footer()
-            print("HIT OR STAND (y for hit):")
+            print("HIT OR STAND (y to hit, n to stand):")
             
             yn_prompt = input()
             
@@ -154,8 +154,28 @@ def main():
 
         elif winning_score == 0 or winning_score == 1:
             print("-= TIE =-")
-
+        
     elif yn_prompt.lower() == "n":
         return
 
-main()
+main_loop_flag = True
+
+while(main_loop_flag == True):
+    main()
+    print("\nHIT ENTER TO PLAY AGAIN\n(w to change wager and play, q to quit)")
+    
+    main_prompt = input()
+    
+    if main_prompt.lower() == "w":
+        while(True): 
+            print("ENTER NEW WAGER: ")
+            wager = int(input())
+
+            if wager > balance:
+                print("ERROR: WAGER LARGER THAN BALANCE")
+
+            else:
+                break
+    
+    elif main_prompt.lower() == "q":
+        main_loop_flag = False
