@@ -1,8 +1,8 @@
-import random ##for shuffle
-from os import system ##for screen clearing
+import random #for shuffle
+from os import system #for screen clearing
 
 SEPERATOR_LEN = 50  #length of the seperators that appear on screen
-
+                    #TODO make this dependent on term window width
 balance = 1000
 wager = 15          #default, can be changed in main game loop
 winnings = 0
@@ -29,6 +29,13 @@ def calculate_score(hand):
             score -= 10
 
     return score
+
+def compare_scores(p1_score, p2_score):
+        scores = [p1_score, p2_score]
+        scores.sort(reverse = True)
+        for score in scores:
+            if score < 21 and (scores[score - 1] < score):
+                pass
 
 ##functions with the prefix 'display' handles
 ##the display of global variables such as winnings
@@ -86,7 +93,7 @@ def main():
             print(f"SCORE: {player_score}") 
             
             if player_score == 21:
-                print("BLACKJACK!")
+                print("!!! BLACKJACK !!!")
                 display_footer() 
                 break
 
@@ -98,6 +105,18 @@ def main():
             if yn_prompt.lower() == "y":
                 player_hand.append(deck.pop())
 
+        while dealer_score < 16:    #dealer's turn
+            dealer_score = calculate_score(dealer_hand)
+            system("clear || cls")
+            display_header()
+            print("HOUSE'S HAND: ", end = '') 
+            print(f"\nHOUSE'S SCORE: {dealer_score}")
+            display_hand(dealer_hand)
+            print("PLAYER HAND: ", end = '')
+            display_hand(player_hand)
+            print(f"SCORE: {player_score}")
+            dealer_hand.append(deck.pop())
+    
     elif yn_prompt.lower() == "n":
         return
 
