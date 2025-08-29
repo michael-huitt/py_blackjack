@@ -17,6 +17,7 @@ def calculate_score(hand):
             score += 10
         
         elif rank == "Ace":
+            score += 11 
             num_aces += 1
         
         else:
@@ -68,11 +69,8 @@ def main():
             
         system("clear || cls")
         display_header()
-        print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND:")
+        print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
         display_hand(player_hand)
-        print(calculate_score(player_hand))
-
-        input()
         
     elif yn_prompt.lower() == "n":
         return
