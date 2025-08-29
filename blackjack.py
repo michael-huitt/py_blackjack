@@ -9,6 +9,14 @@ balance = 1000
 wager = 15                          #default, can be changed in main game loop
 winnings = 0
 
+def add_balance():
+    global balance
+    balance += wager
+
+def subtract_balance():
+    global balance
+    balance -= wager
+
 def calculate_score(hand):
     score = 0 
     num_aces = 0 
@@ -134,13 +142,15 @@ def main():
         winning_score = compare_scores(player_score, dealer_score) 
         
         if player_score == winning_score:
-            print("!!! YOU WIN !!!")
-        
+            print("-= YOU WIN =-")
+            add_balance()
+
         elif dealer_score == winning_score:
-            print("DEALER WINS")
-        
+            print("-= DEALER WINS =-")
+            subtract_balance()
+
         elif winning_score == 0:
-            print("TIE")
+            print("-= TIE =-")
 
     elif yn_prompt.lower() == "n":
         return
