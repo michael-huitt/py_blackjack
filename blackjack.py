@@ -9,6 +9,7 @@ wager = 15 ##default, can be changed in main game loop
 def calculate_score(hand):
     score = 0 
     num_aces = 0 
+    
     for card in hand:
         rank = card.split(" ")[0] 
         
@@ -20,6 +21,10 @@ def calculate_score(hand):
         
         else:
             score += int(rank)
+
+    for ace in range(num_aces):
+        if score > 21:
+            score -= 10
 
     return score
 
