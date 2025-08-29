@@ -1,10 +1,11 @@
 import random ##for shuffle
 from os import system ##for screen clearing
 
-SEPERATOR_LEN = 30
+SEPERATOR_LEN = 50
 
 balance = 1000
 wager = 15 ##default, can be changed in main game loop
+winnings = 0
 
 def calculate_score(hand):
     score = 0 
@@ -41,6 +42,11 @@ def display_header():
     print(f"BALANCE: {balance}\nWAGER: {wager}")
     print('-' * SEPERATOR_LEN)
 
+def display_footer():
+    print('-' * SEPERATOR_LEN)
+    print(f"WINNINGS: {winnings}")
+    print('=' * SEPERATOR_LEN)
+
 def main():
     player_hand = []
     dealer_hand = []
@@ -56,10 +62,11 @@ def main():
        
     system("clear || cls") 
     display_header()
-
-    print("PLAY? (y/n)")
+    display_footer() 
+    
+    print("DEAL? (y/n)")
     yn_prompt = input()
-        
+
     if yn_prompt.lower() == "y":
         player_score = dealer_score = 0 
 
@@ -71,7 +78,8 @@ def main():
         display_header()
         print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
         display_hand(player_hand)
-        
+        display_footer()     
+    
     elif yn_prompt.lower() == "n":
         return
 
