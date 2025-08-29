@@ -1,8 +1,10 @@
 import random #for shuffle
-from os import system #for screen clearing
+import os
 
-SEPERATOR_LEN = 50  #length of the seperators that appear on screen
-                    #TODO make this dependent on term window width
+term_size = os.get_terminal_size()
+
+SEPERATOR_LEN = term_size.columns  #length of the seperators that appear on screen
+
 balance = 1000
 wager = 15          #default, can be changed in main game loop
 winnings = 0
@@ -35,8 +37,8 @@ def compare_scores(p1_score, p2_score):
         scores.sort(reverse = True)
         for score in scores:
             if score < 21 and (scores[score - 1] < score):
-                pass
-
+                   pass 
+                    
 ##functions with the prefix 'display' handles
 ##the display of global variables such as winnings
 
@@ -70,7 +72,7 @@ def main():
         
     random.shuffle(deck)
        
-    system("clear || cls") 
+    os.system("clear || cls") 
     display_header()
     display_footer() 
     
@@ -86,15 +88,13 @@ def main():
             
         while player_score < 21:    #player's turn
             player_score = calculate_score(player_hand) 
-            system("clear || cls")
+            os.system("clear || cls")
             display_header()
             print(f"HOUSE'S HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
             display_hand(player_hand)
             print(f"SCORE: {player_score}") 
             
-            if player_score == 21:
-                print("!!! BLACKJACK !!!")
-                display_footer() 
+            if player_score > 21:
                 break
 
             display_footer()
@@ -104,19 +104,22 @@ def main():
             
             if yn_prompt.lower() == "y":
                 player_hand.append(deck.pop())
+            elif yn_prompt.lower() == "n":
+                break
 
         while dealer_score < 16:    #dealer's turn
             dealer_score = calculate_score(dealer_hand)
-            system("clear || cls")
+            os.system("clear || cls")
             display_header()
             print("HOUSE'S HAND: ", end = '') 
-            print(f"\nHOUSE'S SCORE: {dealer_score}")
-            display_hand(dealer_hand)
+            display_hand(dealer_hand) 
+            print(f"HOUSE'S SCORE: {dealer_score}\n")
             print("PLAYER HAND: ", end = '')
             display_hand(player_hand)
             print(f"SCORE: {player_score}")
             dealer_hand.append(deck.pop())
-    
+            display_footer()
+
     elif yn_prompt.lower() == "n":
         return
 
