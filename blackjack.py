@@ -1,10 +1,10 @@
 import random ##for shuffle
 from os import system ##for screen clearing
 
-SEPERATOR_LEN = 50
+SEPERATOR_LEN = 50  #length of the seperators that appear on screen
 
 balance = 1000
-wager = 15 ##default, can be changed in main game loop
+wager = 15          #default, can be changed in main game loop
 winnings = 0
 
 def calculate_score(hand):
@@ -29,6 +29,9 @@ def calculate_score(hand):
             score -= 10
 
     return score
+
+##functions with the prefix 'display' handles
+##the display of global variables such as winnings
 
 def display_hand(hand):
     for card in hand:
@@ -74,13 +77,19 @@ def main():
             dealer_hand.append(deck.pop())
             player_hand.append(deck.pop())
             
-        while player_score <= 21:
+        while player_score < 21:    #player's turn
             player_score = calculate_score(player_hand) 
             system("clear || cls")
             display_header()
-            print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
+            print(f"HOUSE'S HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
             display_hand(player_hand)
             print(f"SCORE: {player_score}") 
+            
+            if player_score == 21:
+                print("BLACKJACK!")
+                display_footer() 
+                break
+
             display_footer()
             print("HIT OR STAND (y for hit):")
             
