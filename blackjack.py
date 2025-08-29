@@ -116,7 +116,7 @@ def main():
             display_hand(player_hand)
             print(f"SCORE: {player_score}") 
             
-            if player_score > 21:
+            if player_score >= 21:
                 break
 
             display_footer()
