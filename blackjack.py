@@ -162,6 +162,12 @@ main_loop_flag = True
 
 while(main_loop_flag == True):
     main()
+    
+    if balance <= 0:
+            os.system("clear || cls")
+            print("\n\n -=OUT OF BALANCE. YOU LOSE=-"_)
+            main_loop_flag = False
+
     print("\nHIT ENTER TO PLAY AGAIN\n(w to change wager and play, q to quit)")
     
     main_prompt = input()
