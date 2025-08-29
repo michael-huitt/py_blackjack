@@ -46,7 +46,7 @@ def main():
     dealer_hand = []
     deck = [] 
     suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
-    ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "King", "Queen", "Ace"] 
+    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "King", "Queen", "Ace"] 
         
     for suit in suits:
         for rank in ranks:
