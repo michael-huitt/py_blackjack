@@ -10,9 +10,18 @@ def calculate_score(hand):
     score = 0 
     num_aces = 0 
     for card in hand:
-        if card[0] == 'J' or 'K' or 'Q': score += 10
-        elif card[0] == 'A': num_aces += 1
-        else: score += card[0]
+        rank = card.split(" ")[0] 
+        
+        if rank in ("Jack", "Queen", "King"):
+            score += 10
+        
+        elif rank == "Ace":
+            num_aces += 1
+        
+        else:
+            score += int(rank)
+
+    return score
 
 def display_hand(hand):
     for card in hand:
