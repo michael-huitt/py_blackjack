@@ -74,12 +74,21 @@ def main():
             dealer_hand.append(deck.pop())
             player_hand.append(deck.pop())
             
-        system("clear || cls")
-        display_header()
-        print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
-        display_hand(player_hand)
-        display_footer()     
-    
+        while player_score <= 21:
+            player_score = calculate_score(player_hand) 
+            system("clear || cls")
+            display_header()
+            print(f"DEALER HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
+            display_hand(player_hand)
+            print(f"SCORE: {player_score}") 
+            display_footer()
+            print("HIT OR STAND (y for hit):")
+            
+            yn_prompt = input()
+            
+            if yn_prompt.lower() == "y":
+                player_hand.append(deck.pop())
+
     elif yn_prompt.lower() == "n":
         return
 
