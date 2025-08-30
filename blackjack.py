@@ -17,6 +17,13 @@ def subtract_balance():
     global balance
     balance -= wager
 
+def update_winnings(win):
+    global winnings
+    if win == True:
+        winnings += wager
+    elif win == False:
+        winnings -= wager
+
 def calculate_score(hand):
     score = 0 
     num_aces = 0 
@@ -150,10 +157,12 @@ def main():
         if player_score == winning_score:
             print("-= YOU WIN =-")
             add_balance()
+            update_winnings(True)
 
         elif dealer_score == winning_score:
             print("-= DEALER WINS =-")
             subtract_balance()
+            update_winnings(False)
 
         elif winning_score == 0 or winning_score == 1:
             print("-= TIE =-")
