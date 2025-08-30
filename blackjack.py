@@ -1,5 +1,5 @@
 import random #for shuffle
-import os
+import os #for screen clearing
 
 term_size = os.get_terminal_size()
 
@@ -21,6 +21,8 @@ def calculate_score(hand):
     score = 0 
     num_aces = 0 
     
+    ##since the first word of each string is
+    ##unique, we can use it to determine score 
     for card in hand:
         rank = card.split(" ")[0] 
         
@@ -29,11 +31,11 @@ def calculate_score(hand):
         
         elif rank == "Ace":
             score += 11 
-            num_aces += 1
-        
+            num_aces += 1   #tracking aces and deducting 10
+                            #per while over 21 
         else:
-            score += int(rank)
-
+            score += int(rank)  #since the remaining ranks after the conditionals
+                                #are 2 - 10 
     for ace in range(num_aces):
         if score > 21:
             score -= 10
@@ -68,6 +70,7 @@ def display_hand(hand):
     for card in hand:
         if card == hand[-1]:
             print(card)
+        
         else:
             print(card, end = ", ")
 
@@ -112,8 +115,8 @@ def main():
             player_score = calculate_score(player_hand) 
             os.system("clear || cls")
             display_header()
-            print(f"HOUSE'S HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '')
-            display_hand(player_hand)
+            print(f"HOUSE'S HAND: {dealer_hand[0]}\n\nPLAYER HAND: ", end = '') #to keep house's 2nd
+            display_hand(player_hand)                                           #card hidden
             print(f"SCORE: {player_score}") 
             
             if player_score >= 21:
