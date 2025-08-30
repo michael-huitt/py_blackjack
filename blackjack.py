@@ -39,10 +39,10 @@ def calculate_score(hand):
         elif rank == "Ace":
             score += 11 
             num_aces += 1   #tracking aces and deducting 10
-                            #per while over 21 
+                            #per while score over 21 
         else:
             score += int(rank)  #since the remaining ranks after the conditionals
-                                #are 2 - 10 
+                                #are 2 - 10, just use them directly 
     for ace in range(num_aces):
         if score > 21:
             score -= 10
